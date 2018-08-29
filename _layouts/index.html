@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/assets/main.css"> 
+    </head>
+    <body>
+        <article>
+            <header class="header" id="js-header"></header>
+            <div role="main" class="main" id="js-main">
+
+                <div class="left">
+                    <div class="screen">1.</div>
+                    <div class="screen">2.</div>
+                    <div class="screen">3.</div>
+                    <div class="screen">4.</div>
+                    <div class="screen">5.</div>
+                </div>
+
+                <div class="right" id="js-right">
+                    <div class="screen">1.</div>
+                    <div class="screen">2.</div>
+                    <div class="screen">3.</div>
+                    <div class="screen">4.</div>
+                    <div class="screen">5.</div>
+                </div>
+
+            </div>
+            <footer class="footer"></footer>
+        </article>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+
+            $(function(){
+
+                var $window = $(window),
+                    $right = $('#js-right'),
+                    $main = $('#js-main'),
+                    $header = $('#js-header'),                    
+                    top = -($main.height()-$window.height());
+
+                    // console.log($window.height());
+
+                $right.css({
+                    top: top
+                });
+
+                $window.on('scroll', function(){
+
+                    var limit = ($header.height()+$main.height())-$window.height(),
+                        scroll = $window.scrollTop();
+
+                    console.log(limit, scroll);
+
+                    if(scroll >= $header.height()){
+                        if(scroll <= limit){
+                            $right.css({
+                                top: (top+(scroll*2))-$window.height()
+                            })
+                        } else {
+                            $right.css({
+                                top: limit-$header.height()
+                            });    
+                        }                       
+                    } else {
+                        $right.css({
+                            top: top
+                        });
+                    }
+                    
+                });
+
+            });
+
+        </script>
+
+    </body>
+</html>
